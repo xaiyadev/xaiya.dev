@@ -20,7 +20,7 @@ DEVENV_PROFILE='/nix/store/7cbcanxgm7d9hi50bjzvws3yi1jc0zma-devenv-profile'
 export DEVENV_PROFILE
 DEVENV_ROOT='/home/xaiya/Documents/Development/xaiya.dev'
 export DEVENV_ROOT
-DEVENV_RUNTIME='/run/user/1002/devenv-c8d506c'
+DEVENV_RUNTIME='/run/user/1001/devenv-c8d506c'
 export DEVENV_RUNTIME
 DEVENV_STATE='/home/xaiya/Documents/Development/xaiya.dev/.devenv/state'
 export DEVENV_STATE
@@ -47,7 +47,7 @@ NIX_CC='/nix/store/f0m6caffiykyvsjim9376a3hx2yj2ghj-gcc-wrapper-14.2.1.20250322'
 export NIX_CC
 NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu='1'
 export NIX_CC_WRAPPER_TARGET_HOST_x86_64_unknown_linux_gnu
-NIX_CFLAGS_COMPILE=' -frandom-seed=2ayp3ivk6r -isystem /nix/store/6jqywliznnxxnq2vdr7372pfv5000qgz-nodejs-slim-22.14.0/include -isystem /nix/store/6jqywliznnxxnq2vdr7372pfv5000qgz-nodejs-slim-22.14.0/include'
+NIX_CFLAGS_COMPILE=' -frandom-seed=q4lj5ws3x4 -isystem /nix/store/6jqywliznnxxnq2vdr7372pfv5000qgz-nodejs-slim-22.14.0/include -isystem /nix/store/6jqywliznnxxnq2vdr7372pfv5000qgz-nodejs-slim-22.14.0/include'
 export NIX_CFLAGS_COMPILE
 NIX_ENFORCE_NO_NATIVE='1'
 export NIX_ENFORCE_NO_NATIVE
@@ -202,7 +202,7 @@ export PS1="\[\e[0;34m\](devenv)\[\e[0m\] ${PS1-}"
 # override temp directories after "nix develop"
 for var in TMP TMPDIR TEMP TEMPDIR; do
   if [ -n "${!var-}" ]; then
-    export "$var"=/run/user/1002
+    export "$var"=/run/user/1001
   fi
 done
 if [ -n "${NIX_BUILD_TOP-}" ]; then
@@ -228,8 +228,8 @@ then
 fi
 unset HOST_PATH NIX_BUILD_CORES __structuredAttrs buildInputs buildPhase builder depsBuildBuild depsBuildBuildPropagated depsBuildTarget depsBuildTargetPropagated depsHostHost depsHostHostPropagated depsTargetTarget depsTargetTargetPropagated dontAddDisableDepTrack doCheck doInstallCheck nativeBuildInputs out outputs patches phases preferLocalBuild propagatedBuildInputs propagatedNativeBuildInputs shell shellHook stdenv strictDeps
 
-mkdir -p /run/user/1002/devenv-c8d506c
-ln -snf /run/user/1002/devenv-c8d506c /home/xaiya/Documents/Development/xaiya.dev/.devenv/run
+mkdir -p /run/user/1001/devenv-c8d506c
+ln -snf /run/user/1001/devenv-c8d506c /home/xaiya/Documents/Development/xaiya.dev/.devenv/run
 
 # Read the path to the installed `configPath` from the hook state.
 configFile=""
