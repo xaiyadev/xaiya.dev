@@ -2,8 +2,7 @@
 .idea/
 
 # development environment
-.devenv
-.direnv
+.direnv/
 
 # Logs
 logs

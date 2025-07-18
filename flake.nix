@@ -1,51 +1,25 @@
 {
+  description = "Development environment for the repository 'xaiya.dev'";
+
   inputs = {
-    nixpkgs.url = "github:cachix/devenv-nixpkgs/rolling";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     systems.url = "github:nix-systems/default";
-    devenv.url = "github:cachix/devenv";
-    devenv.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  nixConfig = {
-    extra-trusted-public-keys = "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw=";
-    extra-substituters = "https://devenv.cachix.org";
+  outputs = { nixpkgs, systems, ... }: let
+    forAllSystems =
+      function:
+      nixpkgs.lib.genAttrs (import systems) (
+        system: function nixpkgs.legacyPackages.${system}
+      );
+
+  in {
+    # When using devShells 'bash' will be used
+    # If you want your own shell please insert '-c $SHELL' to your command
+    devShells = forAllSystems (pkgs: {
+      default = pkgs.mkShell {
+        packages = [ pkgs.bun ];
+      };
+    });
   };
-
-  outputs = { self, nixpkgs, devenv, systems, ... } @ inputs:
-    let
-      forEachSystem = nixpkgs.lib.genAttrs (import systems);
-    in
-    {
-      packages = forEachSystem (system: {
-        devenv-up = self.devShells.${system}.default.config.procfileScript;
-        devenv-test = self.devShells.${system}.default.config.test;
-      });
-
-      devShells = forEachSystem
-        (system:
-          let
-            pkgs = nixpkgs.legacyPackages.${system};
-          in
-          {
-            default = devenv.lib.mkShell {
-              inherit inputs pkgs;
-              modules = [
-                {
-                  languages = {
-                    typescript.enable = true;
-
-                    javascript = {
-                      enable = true;
-
-                      bun = {
-                        enable = true;
-                        install.enable = true;
-                      };
-                    };
-                  };
-                }
-              ];
-            };
-          });
-    };
 }
